@@ -70,7 +70,7 @@ body{
 .search-control::placeholder{
     color: var(--tenne-tawny);
 }
-.search-btn{
+.search-btn {
     width: 55px;
     height: 55px;
     font-size: 1.8rem;
@@ -79,14 +79,12 @@ body{
     border: none;
     border-top-right-radius: 2rem;
     border-bottom-right-radius: 2rem;
-    transition: all 0.4s linear;
-    -webkit-transition: all 0.4s linear;
-    -moz-transition: all 0.4s linear;
-    -ms-transition: all 0.4s linear;
-    -o-transition: all 0.4s linear;
+    transition: all 0.4s ease, transform 0.3s ease;  /* Add transform transition */
 }
-.search-btn:hover{
+
+.search-btn:hover {
     background: var(--tenne-tawny-dark);
+    transform: scale(1.05);  /* Add hover animation */
 }
 .meal-result{
     margin-top: 4rem;
@@ -94,16 +92,17 @@ body{
 #meal{
     margin: 2.4rem 0;
 }
-.meal-item{
+.meal-item {
     border-radius: 1rem;
-    -webkit-border-radius: 1rem;
-    -moz-border-radius: 1rem;
-    -ms-border-radius: 1rem;
-    -o-border-radius: 1rem;
     overflow: hidden;
-    box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.79);
+    box-shadow: 0 10px 21px -12px rgba(0, 0, 0, 0.79);
     margin: 2rem 0;
+    transition: box-shadow 0.3s ease-in-out;  /* Add transition for hover effect */
 }
+.meal-item:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  /* Enhance shadow on hover */
+}
+
 .meal-img img{
     width: 100%;
     display: block;
@@ -135,8 +134,9 @@ body{
     -ms-transition: all 0.4s linear;
     -o-transition: all 0.4s linear;
 }
-.recipe-btn:hover{
+.recipe-btn:hover {
     background: var(--tenne-tawny-dark);
+    transform: scale(1.05);  /* Add hover animation */
 }
 
 /* meal details */
