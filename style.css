@@ -26,21 +26,27 @@ body{
 .text{
     opacity: 0.8;
 }
-.title{
-    font-size: 2rem;
+.title {
+    font-size: 2.5rem;  /* Increase font size */
+    font-weight: bold;  /* Add more weight to the title */
+    color: var(--tenne-tawny-dark);  /* Use the darker variant of the theme color */
     margin-bottom: 1rem;
 }
+
 
 /*  */
 .container{
     min-height: 100vh;
 }
-.meal-wrapper{
+.meal-wrapper {
     max-width: 1280px;
     margin: 0 auto;
     padding: 2rem;
     background: #fff;
     text-align: center;
+    background-color: #f9f9f9;  /* Add a light background */
+    border-radius: 15px;  /* Add rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  /* Add a light shadow */
 }
 .meal-search{
     margin: 2rem 0;
@@ -57,7 +63,7 @@ body{
 .search-btn{
     width: 100%;
 }
-.search-control{
+.search-control {
     padding: 0 1rem;
     font-size: 1.1rem;
     font-family: inherit;
@@ -66,6 +72,11 @@ body{
     color: var(--tenne-tawny);
     border-top-left-radius: 2rem;
     border-bottom-left-radius: 2rem;
+    transition: border-color 0.3s ease-in-out;  /* Add transition for focus effect */
+}
+
+.search-control:focus {
+    border-color: var(--tenne-tawny-dark);  /* Change border color on focus */
 }
 .search-control::placeholder{
     color: var(--tenne-tawny);
@@ -89,18 +100,25 @@ body{
 .meal-result{
     margin-top: 4rem;
 }
-#meal{
+#meal {
     margin: 2.4rem 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
+#meal.loaded {
+    opacity: 1;  /* This class can be added via JS when search results are loaded */
+}
+
 .meal-item {
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: 0 10px 21px -12px rgba(0, 0, 0, 0.79);
     margin: 2rem 0;
-    transition: box-shadow 0.3s ease-in-out;  /* Add transition for hover effect */
+    transition: transform 0.3s ease-in-out; 
 }
 .meal-item:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  /* Enhance shadow on hover */
+    box-shadow: 0 15px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px);   /* Enhance shadow on hover */
 }
 
 .meal-img img{
@@ -110,8 +128,9 @@ body{
 .meal-name{
     padding: 1.5rem 0.5rem;
 }
-.meal-name h3{
-    font-size: 1.4rem;
+.meal-name h3 {
+    font-size: 1.6rem;  
+    font-weight: 600; 
 }
 .recipe-btn{
     text-decoration: none;
@@ -305,5 +324,16 @@ body{
 @media screen and (min-width: 992px){
     #meal{
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media screen and (min-width: 768px) {
+    #meal {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  /* Dynamically adjust columns */
+        gap: 2rem;
+    }
+    .meal-item {
+        margin: 0;
+        padding: 1rem;
     }
 }
