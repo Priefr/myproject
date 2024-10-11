@@ -13,7 +13,6 @@ recipeCloseBtn.addEventListener('click', () => {
 });
 
 
-// get meal list that matches with the ingredients
 function getMealList(){
     let searchInputTxt = document.getElementById('search-input').value.trim();
     fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchInputTxt}`)
@@ -56,10 +55,10 @@ function getMealRecipe(e){
     }
 }
 
-// create a modal
-function mealRecipeModal(meal){
+function mealRecipeModal(meal) {
     console.log(meal);
     meal = meal[0];
+
     let html = `
         <h2 class = "recipe-title">${meal.strMeal}</h2>
         <p class = "recipe-category">${meal.strCategory}</p>
@@ -74,6 +73,9 @@ function mealRecipeModal(meal){
             <a href = "${meal.strYoutube}" target = "_blank">Watch Video</a>
         </div>
     `;
+
     mealDetailsContent.innerHTML = html;
+
+    // Trigger the fade-in effect by adding 'showRecipe' class
     mealDetailsContent.parentElement.classList.add('showRecipe');
 }

@@ -27,9 +27,9 @@ body{
     opacity: 0.8;
 }
 .title {
-    font-size: 2.5rem;  /* Increase font size */
-    font-weight: bold;  /* Add more weight to the title */
-    color: var(--tenne-tawny-dark);  /* Use the darker variant of the theme color */
+    font-size: 2.5rem;  
+    font-weight: bold; 
+    color: var(--tenne-tawny-dark); 
     margin-bottom: 1rem;
 }
 
@@ -44,9 +44,9 @@ body{
     padding: 2rem;
     background: #fff;
     text-align: center;
-    background-color: #f9f9f9;  /* Add a light background */
-    border-radius: 15px;  /* Add rounded corners */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  /* Add a light shadow */
+    background-color: #f9f9f9; 
+    border-radius: 15px; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
 }
 .meal-search{
     margin: 2rem 0;
@@ -72,11 +72,11 @@ body{
     color: var(--tenne-tawny);
     border-top-left-radius: 2rem;
     border-bottom-left-radius: 2rem;
-    transition: border-color 0.3s ease-in-out;  /* Add transition for focus effect */
+    transition: border-color 0.3s ease-in-out; 
 }
 
 .search-control:focus {
-    border-color: var(--tenne-tawny-dark);  /* Change border color on focus */
+    border-color: var(--tenne-tawny-dark);  
 }
 .search-control::placeholder{
     color: var(--tenne-tawny);
@@ -90,12 +90,12 @@ body{
     border: none;
     border-top-right-radius: 2rem;
     border-bottom-right-radius: 2rem;
-    transition: all 0.4s ease, transform 0.3s ease;  /* Add transform transition */
+    transition: all 0.4s ease, transform 0.3s ease;  
 }
 
 .search-btn:hover {
     background: var(--tenne-tawny-dark);
-    transform: scale(1.05);  /* Add hover animation */
+    transform: scale(1.05); 
 }
 .meal-result{
     margin-top: 4rem;
@@ -106,7 +106,7 @@ body{
     transition: opacity 0.5s ease-in-out;
 }
 #meal.loaded {
-    opacity: 1;  /* This class can be added via JS when search results are loaded */
+    opacity: 1; 
 }
 
 .meal-item {
@@ -118,7 +118,7 @@ body{
 }
 .meal-item:hover {
     box-shadow: 0 15px 16px rgba(0, 0, 0, 0.2);
-    transform: translateY(-10px);   /* Enhance shadow on hover */
+    transform: translateY(-10px);  
 }
 
 .meal-img img{
@@ -155,11 +155,11 @@ body{
 }
 .recipe-btn:hover {
     background: var(--tenne-tawny-dark);
-    transform: scale(1.05);  /* Add hover animation */
+    transform: scale(1.05);  
 }
 
 /* meal details */
-.meal-details{
+.meal-details {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -171,15 +171,13 @@ body{
     color: #fff;
     background: var(--tenne-tawny);
     border-radius: 1rem;
-    -webkit-border-radius: 1rem;
-    -moz-border-radius: 1rem;
-    -ms-border-radius: 1rem;
-    -o-border-radius: 1rem;
     width: 90%;
-    height: 90%;
-    overflow-y: scroll;
+    height: auto;
+    max-height: 90%;
+    overflow-y: auto;
+    padding: 2rem 1rem;
+    z-index: 1000;
     display: none;
-    padding: 2rem 0;
 }
 .meal-details::-webkit-scrollbar{
     width: 10px;
@@ -199,8 +197,16 @@ body{
     display: block;
 }
 
-.meal-details-content{
-    margin: 2rem;
+.meal-details-content {
+    padding: 20px;
+    background-color: var(--tenne-tawny);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; 
+    max-width: 600px;
+    margin: 0 auto; 
+    display: block;
+    text-align: center;
 }
 .meal-details-content p:not(.recipe-category){
     padding: 1rem 0;
@@ -210,8 +216,9 @@ body{
     right: 2rem;
     top: 2rem;
     font-size: 1.8rem;
-    background: #fff;
+    background: rgb(248, 248, 248);
     border: none;
+    z-index: 1100;
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -224,9 +231,10 @@ body{
     justify-content: center;
     opacity: 0.9;
 }
-.recipe-title{
-    letter-spacing: 1px;
-    padding-bottom: 1rem;
+.recipe-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 .recipe-category{
     background: #fff;
@@ -252,9 +260,42 @@ body{
     -ms-border-radius: 0.3rem;
     -o-border-radius: 0.3rem;
 }
-.recipe-instruct{
-    padding: 1rem 0;
+/* Recipe fade-in animation */
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px); 
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  
+  
+  .recipe-instruct {
+    opacity: 0; 
+    animation: fadeIn 1s ease forwards; 
+    font-size: 2rem;
+    line-height: 1.6;
+    margin-top: 20px;
+    color: #ffffff;
 }
+
+
+.recipe-instruct h3 {
+    font-size: 1.5rem; 
+    margin-bottom: 10px;
+}
+
+  
+  
+  .showRecipe .meal-details-content {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+  }
+  
 .recipe-meal-img img{
     width: 100px;
     height: 100px;
@@ -298,7 +339,6 @@ body{
 
 
 
-/* Media Queries */
 @media screen and (min-width: 600px){
     .meal-search-box{
         width: 540px;
@@ -329,7 +369,7 @@ body{
 @media screen and (min-width: 768px) {
     #meal {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  /* Dynamically adjust columns */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  
         gap: 2rem;
     }
     .meal-item {
