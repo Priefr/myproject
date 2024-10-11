@@ -211,26 +211,39 @@ body{
 .meal-details-content p:not(.recipe-category){
     padding: 1rem 0;
 }
-.recipe-close-btn{
-    position: absolute;
+.meal-details-content ol {
+    text-align: left; 
+    padding-left: 20px;
+    list-style-position: inside;
+}
+
+.recipe-instruct {
+    margin-bottom: 20px;
+}
+.recipe-close-btn {
+    position: fixed;
     right: 2rem;
     top: 2rem;
     font-size: 1.8rem;
     background: rgb(248, 248, 248);
     border: none;
-    z-index: 1100;
+    z-index: 2100;
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0.9;
+    cursor: pointer; 
 }
+
+/* Add hover effect */
+.recipe-close-btn:hover {
+    opacity: 1;
+    background: #fff;
+}
+
 .recipe-title {
     font-size: 2rem;
     font-weight: bold;
