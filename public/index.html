@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Meal For Your Ingredients</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="auth.js"></script>
+</head>
+<body>
+  <header>
+   <!-- Navigation Bar -->
+   <nav class="navbar">
+    <div class="navbar-content">
+      <h1 class="navbar-title">Recipe Finder</h1>
+      <button class="login-btn" id="login-btn" onclick="openLoginModal()">Login</button>
+      <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
+    </div>
+  </nav>
+</header>
+
+  <!-- Sidebar Menu -->
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div id="admin-menu" style="display: none;">
+      <button class="dropdown-btn">Manage Meals 
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-container">
+        <a href="#" id="addMealBtn">Add Meal</a>
+        <a href="#" id="deleteMealBtn">Delete Meal</a>
+        <!-- Delete Meal Section -->
+        <div id="mealListContainer">
+          <div id="meallist">
+            <!-- This is where the meals will be dynamically inserted -->
+            <!-- Example meal item -->
+            <!-- Repeat for other meals -->
+        </div>
+        
+        </div>
+ 
+      </div>
+
+    </div>
+    <div id="user-menu" style="display: none;">
+      <a href="#">My Favorites</a>
+    </div>
+    <div id="default-menu">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+    </div>
+    <b><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <a href="#" id="logout-btn" style="display: none;" onclick="logout()">Logout</a>
+  </div>
+  <!-- Add Meal Modal -->
+<div id="addMealModal" class="addMealModal">
+  <div class="addMealModal-content">
+    <span class="close" id="closeAddMealModal">&times;</span>
+    <h2>Add Meal</h2>
+    <form id="addMealForm"action="/addMeal" method="POST">
+      <label for="mealName">Meal Name:</label>
+      <input type="text" id="mealName" required>
+
+      <label for="mealCategory">Category:</label>
+      <input type="text" id="mealCategory" required>
+
+      <label for="mealArea">Area:</label>
+      <input type="text" id="mealArea" required>
+
+      <label for="mealImageUrl">Image URL:</label>
+      <input type="url" id="mealImageUrl" required>
+
+      <label for="mealInstructions">Instructions:</label>
+      <textarea id="mealInstructions" required></textarea>
+
+      <h3>Ingredients</h3>
+      <div id="ingredientsContainer">
+        <!-- Ingredient inputs will be dynamically added here -->
+        <input type="text" class="ingredient" placeholder="Ingredient 1">
+      </div>
+      <button type="button" id="addIngredientBtn">Add Ingredient</button>
+
+      <button type="submit">Add Meal</button>
+    </form>
+  </div>
+</div>
+
+ <!-- Login Modal -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeLoginModal()">&times;</span>
+      <h2>Login</h2>
+      <form id="loginForm">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+          <button type="submit" class="login-submit-btn">Login</button>
+      </form>
+      <div class="signup-link">
+          <p>Don't have an account? 
+              <button class="btn-signup" onclick="openSignupModal()">Sign Up</button>
+          </p>
+      </div>
+  </div>
+</div>
+
+<!-- Signup Modal (hidden initially) -->
+<div id="signupModal" class="modal" style="display:none;">
+  <div class="modal-content">
+      <span class="close" onclick="closeSignupModal()">&times;</span>
+      <h2>Sign Up</h2>
+      <form id="signupForm">
+          <label for="signup-username">Username:</label>
+          <input type="text" id="signup-username" name="signup-username" required>
+          
+          <label for="signup-password">Password:</label>
+          <input type="password" id="signup-password" name="signup-password" required>
+          
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+
+          <button type="submit" class="btn-signup">Sign Up</button>
+      </form>
+  </div>
+</div>
+
+<!-- Login button that opens the login modal -->
+
+</div>
+  <div class="container">
+    <div class="meal-wrapper">
+      <div class="meal-search">
+        <h2 class="title">Find Meals For Your Ingredients</h2>
+        <blockquote>Real food doesn't have ingredients, real food is ingredients.<br>
+          <cite>- Jamie Oliver</cite>
+        </blockquote>
+
+        <div class="meal-search-box">
+          <input type="text" class="search-control" placeholder="Enter an ingredient" id="search-input">
+          <button type="submit" class="search-btn btn" id="search-btn">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+     
+      
+      <div id="resultsContainer"></div> <!-- Container to display search results -->
+      
+      <div class="meal-result">
+        <h2 class="title">Your Search Results:</h2>
+        <div id="meal">
+          <!-- Dynamic meal content will go here -->
+        </div>
+      </div>
+
+      <div class="meal-details">
+        <!-- Recipe close button -->
+        <button type="button" class="btn recipe-close-btn" id="recipe-close-btn">
+          <i class="fas fa-times"></i>
+        </button>
+
+        <!-- Meal content -->
+        <div class="meal-details-content">
+          <!-- Dynamic meal details will go here -->
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Firebase App (the core Firebase SDK) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+<!-- Firebase Authentication -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+<!-- Firebase Firestore (optional if you need it) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
+
+  <script src="script.js"></script>
+</body>
+</html>

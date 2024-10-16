@@ -1,0 +1,64 @@
+<script>
+    const auth = getAuth();
+    const db = getFirestore();
+
+    // Check if user is logged in
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // Fetch user data from Firestore
+            const userRef = doc(db, "users", user.uid);
+            getDoc(userRef)
+                .then((docSnapshot) => {
+                    if (docSnapshot.exists()) {
+                        const userData = docSnapshot.data();
+                        console.log('User role:', userData.role);
+
+                        // If not admin, redirect to user dashboard
+                        if (userData.role !== 'admin') {
+                            window.location.href = 'user-dashboard.html';
+                        }
+                    } else {
+                        console.log("No such document!");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error getting user document:", error);
+                });
+        } else {
+            // Redirect to login if not authenticated
+            window.location.href = 'login.html';
+        }
+    });
+    
+  
+
+    // Check if user is logged in
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // Fetch user data from Firestore
+            const userRef = doc(db, "users", user.uid);
+            getDoc(userRef)
+                .then((docSnapshot) => {
+                    if (docSnapshot.exists()) {
+                        const userData = docSnapshot.data();
+                        console.log('User role:', userData.role);
+
+                        // If not admin, redirect to user dashboard
+                        if (userData.role !== 'admin') {
+                            window.location.href = 'user-dashboard.html';
+                        }
+                    } else {
+                        console.log("No such document!");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error getting user document:", error);
+                });
+        } else {
+            // Redirect to login if not authenticated
+            window.location.href = 'login.html';
+        }
+    });
+</script>
+
+
