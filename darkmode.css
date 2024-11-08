@@ -1,0 +1,75 @@
+/* Default light mode colors */
+:root {
+    --background-color: #ffffff;
+    --text-color: #333333;
+    --secondary-color: #f1f1f1;
+    --button-color: #007bff;
+    --button-text-color: #ffffff;
+  }
+  #theme-toggle-btn{
+    margin-top: 10px;
+    position: fixed;   
+    right: 30px;
+    align-items: end;
+  }
+  /* Apply the dark mode colors */
+  .dark-mode {
+    --background-color: #121212;
+    --text-color: #eeeeee;
+    --secondary-color: #1e1e1e;
+    --button-color: #1a73e8;
+    --button-text-color: #ffffff;
+  }
+  .navbar{
+    background-color: var(--background-color);
+  }
+  
+  /* Global styles using CSS variables */
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .search-Container{
+    background-color: var(--background-color);
+
+  }
+  .meal-wrapper, .meal-details  {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .addMealModal-content,.editMealModal-content,.manageMealsModal-content,.manageUsersModal-content,.modal{
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  button {
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: var(--button-color-hover);
+  }
+  
+  .recipe-title, .recipe-category, .recipe-instruct, .recipe-link a {
+    color: var(--text-color);
+  }
+  
+  .meal-details img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Optional media queries for better responsiveness */
+  @media (max-width: 768px) {
+    .meal-details {
+      padding: 10px;
+    }
+  }
+  

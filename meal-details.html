@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Details</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add your CSS links here -->
+</head>
+<body>
+    <div id="mealDetailsContainer">
+        <!-- The meal details will be injected here -->
+    </div>
+
+     <!-- Review Section -->
+     <div id="reviewSection">
+        <h3>Leave a Review</h3>
+        <form id="reviewForm">
+            <div class="review-name">
+            <input type="text" id="reviewUsername" placeholder="Your name" required>
+            <textarea id="reviewText" placeholder="Write your review here..." required></textarea>
+        </div>
+            <label for="reviewRating">Rating:</label>
+            <select id="reviewRating" required>
+                <option value="5">★★★★★</option>
+                <option value="4">★★★★</option>
+                <option value="3">★★★</option>
+                <option value="2">★★</option>
+                <option value="1">★</option>
+            </select>
+    
+            <button type="submit">Submit Review</button>
+        </form>
+    
+
+        <h3>Reviews</h3>
+        <div id="reviewsContainer">
+            <!-- Reviews will be displayed here -->
+        </div>
+    </div>
+
+    <script type="module">
+
+        import {  initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"; // Adjust path as needed
+        import {
+    query, where,
+    getFirestore,
+    setDoc,
+    getDocs,
+    addDoc,
+    deleteDoc,
+    arrayUnion,
+    arrayRemove,
+    updateDoc,
+    collection,
+    doc,
+    getDoc
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+
+
+        // Your Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyAlR3I8bb5WCk9tLkSLXq_903LO_GmcFos",
+    authDomain: "recipefinder-4bf74.firebaseapp.com",
+    databaseURL: "https://recipefinder-4bf74-default-rtdb.firebaseio.com",
+    projectId: "recipefinder-4bf74",
+    storageBucket: "recipefinder-4bf74.appspot.com",
+    messagingSenderId: "748268639671",
+    appId: "1:748268639671:web:392fa0ca7e3473820dc432",
+    measurementId: "G-RGHD7GELMQ"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+        // Get the meal ID from the query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const mealId = urlParams.get('id');
+
+        async function loadMealDetails(mealId) {
+            if (!mealId) {
+                document.getElementById('mealDetailsContainer').innerText = 'No meal ID provided.';
+                return;
+            }
+
+            const mealRef = doc(db, 'meals', mealId);
+            try {
+                const mealSnapshot = await getDoc(mealRef);
+                if (mealSnapshot.exists()) {
+                    const meal = mealSnapshot.data();
+                    displayMealDetails(meal);
+                } else {
+                    document.getElementById('mealDetailsContainer').innerText = 'Meal not found.';
+                }
+            } catch (error) {
+                console.error('Error fetching meal details:', error);
+                document.getElementById('mealDetailsContainer').innerText = 'Error fetching meal details.';
+            }
+        }
+
+        function displayMealDetails(meal) {
+    const container = document.getElementById('mealDetailsContainer');
+    container.innerHTML = `
+        <h2>${meal.strMeal}</h2>
+        
+        <div class="meal-image">
+            <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+        </div>
+        
+        <div class="meal-info">
+            <p><strong>Category:</strong> ${meal.strCategory}</p>
+            <p><strong>Area:</strong> ${meal.strArea}</p>
+        </div>
+        
+        <div class="meal-ingredients">
+            <h3>Ingredients</h3>
+            <ul>${generateIngredientsList(meal)}</ul>
+        </div>
+        
+        <div class="meal-instructions">
+            <h3>Instructions</h3>
+            <p>${meal.strInstructions}</p>
+        </div>
+        
+        <div class="meal-video">
+            <a href="${meal.strYoutube}" target="_blank">Watch Video</a>
+        </div>
+    `;
+}
+
+
+        function generateIngredientsList(meal) {
+            let ingredients = '';
+            for (let i = 1; i <= 20; i++) {
+                if (meal[`strIngredient${i}`]) {
+                    ingredients += `<li>${meal[`strMeasure${i}`] || ''} ${meal[`strIngredient${i}`]}</li>`;
+                }
+            }
+            return ingredients;
+        }
+        
+        // Load existing reviews
+async function loadReviews(mealId) {
+    const reviewsContainer = document.getElementById('reviewsContainer');
+    reviewsContainer.innerHTML = ''; // Clear previous reviews
+
+    try {
+        const reviewsSnapshot = await getDocs(collection(db, 'meals', mealId, 'reviews'));
+        reviewsSnapshot.forEach((doc) => {
+            const reviewData = doc.data();
+            const reviewElement = document.createElement('div');
+            reviewElement.classList.add('review');
+
+            reviewElement.innerHTML = `
+                <p><strong>${reviewData.username}</strong> - ${'★'.repeat(reviewData.rating)} ${'☆'.repeat(5 - reviewData.rating)}</p>
+                <p>${reviewData.text}</p>
+            `;
+            reviewsContainer.appendChild(reviewElement);
+        });
+    } catch (error) {
+        console.error('Error loading reviews:', error);
+    }
+}
+
+// Submit review
+document.getElementById('reviewForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = document.getElementById('reviewUsername').value;
+    const reviewText = document.getElementById('reviewText').value;
+    const rating = parseInt(document.getElementById('reviewRating').value);
+
+    try {
+        await addDoc(collection(db, 'meals', mealId, 'reviews'), {
+            username: username,
+            text: reviewText,
+            rating: rating,
+            timestamp: new Date()
+        });
+        document.getElementById('reviewUsername').value = '';
+        document.getElementById('reviewText').value = '';
+        document.getElementById('reviewRating').value = '5'; // Reset rating to 5 stars
+        loadReviews(mealId); // Reload reviews after adding a new one
+    } catch (error) {
+        console.error('Error submitting review:', error);
+    }
+});
+
+// Initial load
+loadMealDetails(mealId);
+loadReviews(mealId);
+
+
+       
+    </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 
 *{
     padding: 0;
@@ -17,35 +17,55 @@ body{
     line-height: 1.6;
     font-family: 'Poppins', sans-serif;
 }
-/* Navbar Styles */
-.navbar {
-    background-color: hsl(0, 86%, 92%); /* Dark background */
-    justify-content: space-between;
-    padding: 10px 20px; /* Spacing around the navbar */
-    display: flex; /* Use flexbox for layout */
+
+
+
+/* Back Button Styles */
+.back-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
     align-items: center;
-    z-index: 1000; 
+}
+
+.back-btn i {
+    margin-right: 8px;
+    font-size: 20px;
+}
+
+.back-btn:hover {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+
+
+
+.navbar {
+    background-color: hsl(0, 86%, 92%);     
+    justify-content: space-between;
+    padding: 10px 20px;     
+    display: flex;     
+    align-items: center;
+    z-index: 1001; 
     position: fixed;
     transition: top 3s;
     width: 100%;
-    position: fixed; /* Make the navbar fixed */
-    top: 0; /* Stick it to the top */
-    left: 0;
+    position: fixed;     top: 0;     left: 0;
     right: 0;
 }
 
 .navbar-title {
-    color: hsl(29, 86%, 50%); /* White text color */
-    font-size: 24px; /* Font size */
+    color: hsl(29, 86%, 50%);     
+    font-size: 24px;     
     margin: 0;
 }
-/* .navbar-login{
-    position: absolute;
-    right: 0px;
-
-} */
 .login-btn {
-position: fixed;    right: 0px;
+    position: fixed;   
+    right: 0px;
     align-items: end;
     text-decoration: none;
     color: #fff;
@@ -72,7 +92,6 @@ position: fixed;    right: 0px;
     background: var(--tenne-tawny-dark);
     transform: scale(1.05); 
 }
-/* The Modal (hidden by default) */
 .addMealModal {
     display: none;
     position: fixed;
@@ -81,20 +100,10 @@ position: fixed;    right: 0px;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(204, 23, 23, 0.5);
   }
   
-  .addMealModal {
-    display: none; /* Keeps modal hidden until triggered */
-    position: fixed; /* Fixed to viewport */
-    z-index: 1; /* Ensures it stays on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Scrollable if content exceeds */
-    background-color: rgba(0, 0, 0, 0.5); /* Dark translucent background */
-}
+  
 
 .addMealModal-content {
     display: flex;
@@ -103,10 +112,10 @@ position: fixed;    right: 0px;
     margin: 5% auto;
     padding: 20px;
     border-radius: 12px;
-    max-width: 600px; /* Set reasonable width for modal */
-    width: 90%; /* Makes it responsive */
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Adds depth */
-}
+    max-width: 600px;    
+     width: 90%;     
+     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+     }
 
 .close {
     color: #aaa;
@@ -122,7 +131,60 @@ position: fixed;    right: 0px;
     text-decoration: none;
     cursor: pointer;
 }
+.manageMealsModal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
 
+.manageMealsModal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+
+
+li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .manage-btn {
+    display: flex;
+    justify-content: flex-end;    
+     gap: 10px;   }
+  
+  .manage-btn button {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #f44336;     
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .manage-btn button.edit-meal-btn {
+    background-color: #4CAF50;   }
+  
+  .manage-btn button:hover {
+    opacity: 0.9;
+  }
+  
 h2 {
     text-align: center;
     margin-bottom: 20px;
@@ -132,7 +194,7 @@ h2 {
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Adds space between form elements */
+    gap: 15px;
 }
 
 label {
@@ -141,7 +203,9 @@ label {
     margin-bottom: 5px;
 }
 
-input[type="text"], input[type="url"], textarea {
+input[type="text"], 
+input[type="url"],
+ textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -152,13 +216,11 @@ input[type="text"], input[type="url"], textarea {
 }
 
 textarea {
-    height: 100px; /* Set a decent height for the instructions area */
-    resize: vertical; /* Allow resizing only vertically */
-}
+    height: 100px;
+    resize: vertical;  }
 
 button {
-    background-color: #ff7043; /* Accent color */
-    color: white;
+    background-color: #ff7043;     color: white;
     padding: 12px;
     border: none;
     border-radius: 8px;
@@ -168,34 +230,144 @@ button {
 }
 
 button:hover {
-    background-color: #ff5722; /* Darker hover state */
+    background-color: #ff5722; }
+
+
+.editMealModal {
+    display: none;     
+    position: fixed;     
+    z-index: 1001;     
+    left: 0;
+    top: 0;
+    width: 100%;     
+    height: 100%;     
+    overflow: auto;     
+    background-color: rgb(0,0,0);     
 }
 
-/* The Modal (background) */
+.editMealModal-content {
+    background-color: #fefefe;     
+    margin: 15% auto;     
+    padding: 20px;     
+    border: 1px solid #888;     
+    width: 80%;     
+    max-width: 600px;     
+    border-radius: 10px; }
+
+.close {
+    color: #aaa;     float: right;     
+    font-size: 28px;     font-weight: bold; }
+
+.close:hover,
+.close:focus {
+    color: black;     
+    text-decoration: none;     
+    cursor: pointer; }
+
+label {
+    display: block;     
+    margin-top: 10px; }
+
+input[type="text"],
+input[type="url"],
+textarea {
+    width: 100%;     
+    padding: 10px;     
+    margin-top: 5px;     
+    margin-bottom: 15px;     
+    border: 1px solid #ccc;     
+    border-radius: 5px;
+ }
+
+
+
+
+#editIngredientsContainer,#manageUsersBtn {
+    margin-top: 10px; }
+
+#addEditIngredientBtn,.change-role-btn,#manageUsersBtn {
+    background-color: #008CBA; }
+
+#addEditIngredientBtn,.change-role-btn:hover,#manageUsersBtn {
+    background-color: #007B9A; }
+#updateBtn:hover {
+    background-color: hsl(128, 88%, 35%); }
+
+
+.manageUsersModal {
+    display: none; 
+    position: fixed; 
+    z-index: 3;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);    
+    background-color: rgba(0,0,0,0.4); }
+
+.manageUsersModal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa; 
+    float: right; 
+    font-size: 28px; 
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black; 
+    text-decoration: none;
+    cursor: pointer; 
+}
+
+
+#userList {
+    list-style-type: none; 
+    padding: 0; 
+}
+
+#userList li {
+    display: flex; 
+    justify-content: space-between;
+    align-items: center; 
+    margin: 10px 0; 
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+}
+
+
+
 .modal {
     display: none; 
     position: fixed; 
     z-index: 1; 
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; 
+    width: 100%;     height: 100%; 
     background-color: rgba(0, 0, 0, 0.4); 
   }
   
-  /* Modal Content Box */
-  .modal-content {
+    .modal-content {
     background-color: #fff;
-    margin: 15% auto; /* Center the modal */
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 30%; /* Modal width */
+    width: 30%; 
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     border-radius: 8px;
   }
   
-  /* The Close Button */
-  .close {
+    .close {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -209,8 +381,7 @@ button:hover {
     cursor: pointer;
   }
   
-  /* Login Form Styles */
-  .modal-content form , .addMealModal form{
+    .modal-content form , .addMealModal form{
     display: flex;
     flex-direction: column;
   }
@@ -254,10 +425,29 @@ button:hover {
     z-index: 1000; 
     border-radius: 5px; 
     font-size: 16px; 
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-}
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); }
+
+    .error-message {
+        color: red;
+        margin-top: 10px;
+    }
 
 
+    .spinner {
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
 
   .sidenav {
     height: 100vh; 
@@ -273,21 +463,23 @@ button:hover {
    
   }
 
-.sidenav a, .dropdown-btn {
+.sidenav a, .dropdown-btn,#manageUsersBtn {
   padding: 8px 8px 8px 16px;
   text-decoration: none;
   font-size: 25px;
-  color: #818181;
+  color: #abd1e7;
   display: block;
   border: none;
   background: none;
   text-align: left;
   cursor: pointer;
   outline: none;
+  padding: 10px;
 }
 
-.sidenav a:hover, .dropdown-btn:hover {
+.sidenav a:hover, .dropdown-btn:hover,#manageUsersBtn:hover {
   color: #f1f1f1;
+  background: #02171d;
 }
 
 .dropdown-container {
@@ -307,7 +499,7 @@ button:hover {
 
 .fa-caret-down {
   float: right;
-  padding-right: 8px;
+  padding-right: 08px;
 }
   
   .sidenav a {
@@ -325,35 +517,35 @@ button:hover {
     
   }
   .sidenav .closebtn {
+    padding-bottom: 0px;
     position: absolute;
-    top: 12px; /* Adjust vertical alignment */
-    right: 20px; /* Adjust horizontal alignment */
-    font-size: 55px; /* Font size for the "x" */
+    top: 12px; 
+    right: 20px; 
+    font-size: 55px; 
     margin: 0;
-    width: 10px; /* Set circular width */
-    height: 50px; /* Set circular height */
-    line-height: 30px; /* Ensure "x" is centered vertically */
-    text-align: left; /* Center the "x" horizontally */
-    background-color: transparent; /* Transparent background */
+    width: 10px; 
+    height: 50px;
+    line-height: 30px; 
+    text-align: left; 
+    background-color: transparent;
     transition: background-color 0.3s ease, color 0.3s ease;
     color: #fff;
 }
 
-/* On hover, change background color and text color */
 .sidenav .closebtn:hover {
      background: var(--tenne-tawny);
-    color: #030201; /* White text on hover */
-    cursor: pointer;
+    color: #030201;     cursor: pointer;
 }
 
-
+.sidenavmanu{
+    padding-top: 50px;
+}
   
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
 
-/*  */
 .btn{
     font-family: inherit;
     cursor: pointer;
@@ -371,30 +563,31 @@ button:hover {
 }
 
 
-/*  */
 .container{
     min-height: 100vh;
 }
-.meal-wrapper {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-    background: #fff;
-    text-align: center;
-    background-color: #f9f9f9; 
-    border-radius: 15px; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
-}
+  
 .meal-search{
     margin: 2rem 0;
+    transition: transform 0.3s ease;
+    z-index: 1;
+
 }
+  
+  .meal-search.scrolled {
+    transform: translateY(-10px); 
+    z-index: 0;
+  }
+  
 .meal-search cite{
     font-size: 1rem;
+    z-index: 1;
 }
 .meal-search-box{
     margin: 1.2rem 0;
     display: flex;
     align-items: stretch;
+    z-index: 1;
 }
 .search-control,
 .search-btn{
@@ -434,256 +627,206 @@ button:hover {
     background: var(--tenne-tawny-dark);
     transform: scale(1.05); 
 }
-.meal-result{
-    margin-top: 4rem;
+
+.search-Container{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 20px;
+    background: white;
+    z-index: 2;
 }
+
+
+.mealsContainer {
+    width: 100%;
+  }
+  
+  .meal-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+  }
+
+
+
+
+
+
 #meal {
-    margin: 2.4rem 0;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-#meal.loaded {
-    opacity: 1; 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
 .meal-item {
-    border-radius: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 10px 21px -12px rgba(0, 0, 0, 0.79);
-    margin: 2rem 0;
-    transition: transform 0.3s ease-in-out; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
+
+.meal-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.meal-img img {
+    width: 100%;
+    height: auto;
+    border-bottom: 2px solid #f1f1f1;
+}
+
+.meal-name {
+    padding: 15px;
+    text-align: center;
+}
+
+.meal-name h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+
+
+
+
+@media (max-width: 768px) {
+    #meal {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+    }
+
+    .meal-name h3 {
+        font-size: 1rem;
+    }
+}
+
+
+
+
+
+.ingredient-checker {
+    margin: 20px 0;
+}
+
+#userIngredients {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.ingredient-percentage {
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+
+
+
+
+  
+  .meal-content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .meal-list {
+    flex: 1;
+    min-width: 60%;
+  }
+  .checked {
+    color: gold;
+}
+
+.fa-star {
+    font-size: 25px; /* Adjust size as needed */
+    margin-right: 2px;
+}
+/* testing */
+
+
+.like-btn {
+    align-items: center;
+    margin: 10px auto 0;
+    cursor: pointer;
+    font-size: 3rem;
+    color: #e74c3c;
+    z-index: 5;
+}
+.like-btn.liked .fa-heart-o {
+    color: #e74c3c;
+}
+
+/* Ensure the save button is always visible */
+.save-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #2196F3; /* Color of the bookmark icon */
+    z-index: 10; /* Make sure it appears above other elements */
+}
+.save-btn i {
+    font-size: 30px;
+    z-index:3 ;
+}
+/* Hover effect for the save button */
+.save-btn:hover i {
+    color: #ff9800; /* Change color when hovered */
+}
+
+
+.meal-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease, max-height 0.3s ease-in-out;
+    cursor: pointer;
+    margin: 16px;
+}
+
+/* When the card expands */
+.meal-item.expanded {
+    max-height: 600px; /* Limit the expanded height */
+}
+
+/* Inner content that holds details */
+.meal-details {
+    display: none; /* Hidden by default */
+    overflow-y: auto; /* Enable scrolling */
+    max-height: 300px; /* Limit height of details content */
+    transition: max-height 0.3s ease;
+    padding: 1rem;
+}
+
+/* Display meal details when expanded */
+.meal-item.expanded .meal-details {
+    display: block; /* Show when expanded */
+}
+
+/* Scrollbar styling for .meal-details */
+.meal-details::-webkit-scrollbar {
+    width: 10px;
+}
+
+.meal-details::-webkit-scrollbar-thumb {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+/* Hover effect for the meal-item */
 .meal-item:hover {
     box-shadow: 0 15px 16px rgba(0, 0, 0, 0.2);
     transform: translateY(-10px);  
 }
-
-.meal-img img{
-    width: 100%;
-    display: block;
-}
-.meal-name{
-    padding: 1.5rem 0.5rem;
-}
-.meal-name h3 {
-    font-size: 1.6rem;  
-    font-weight: 600; 
-}
-.recipe-btn{
-    text-decoration: none;
-    color: #fff;
-    background: var(--tenne-tawny);
-    font-weight: 500;
-    font-size: 1.1rem;
-    padding: 0.75rem 0;
-    display: block;
-    width: 175px;
-    margin: 1rem auto;
-    border-radius: 2rem;
-    -webkit-border-radius: 2rem;
-    -moz-border-radius: 2rem;
-    -ms-border-radius: 2rem;
-    -o-border-radius: 2rem;
-    transition: all 0.4s linear;
-    -webkit-transition: all 0.4s linear;
-    -moz-transition: all 0.4s linear;
-    -ms-transition: all 0.4s linear;
-    -o-transition: all 0.4s linear;
-}
-.recipe-btn:hover {
-    background: var(--tenne-tawny-dark);
-    transform: scale(1.05);  
-}
-
-/* meal details */
-.meal-details {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    color: #fff;
-    background: var(--tenne-tawny);
-    border-radius: 1rem;
-    width: 90%;
-    height: auto;
-    max-height: 90%;
-    overflow-y: auto;
-    padding: 2rem 1rem;
-    z-index: 1000;
-    display: none;
-}
-.meal-details::-webkit-scrollbar{
-    width: 10px;
-}
-.meal-details::-webkit-scrollbar-thumb{
-    background: #f0f0f0;
-    border-radius: 2rem;
-    -webkit-border-radius: 2rem;
-    -moz-border-radius: 2rem;
-    -ms-border-radius: 2rem;
-    -o-border-radius: 2rem;
-}
-
-
-/* js related */
-.showRecipe{
-    display: block;
-}
-
-.meal-details-content {
-    padding: 20px;
-    background-color: var(--tenne-tawny);
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%; 
-    max-width: 600px;
-    margin: 0 auto; 
-    display: block;
-    text-align: center;
-}
-.meal-details-content p:not(.recipe-category){
-    padding: 1rem 0;
-}
-.meal-details-content ol {
-    text-align: left; 
-    padding-left: 20px;
-    list-style-position: inside;
-}
-
-.recipe-instruct {
-    margin-bottom: 20px;
-}
-.recipe-close-btn {
-    position: fixed;
-    right: 2rem;
-    top: 2rem;
-    font-size: 1.8rem;
-    background: rgb(248, 248, 248);
-    border: none;
-    z-index: 2100;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.9;
-    cursor: pointer; 
-}
-
-/* Add hover effect */
-.recipe-close-btn:hover {
-    opacity: 1;
-    background: #fff;
-}
-
-.recipe-title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-.recipe-category{
-    background: #fff;
-    font-weight: 600;
-    color: var(--tenne-tawny);
-    display: inline-block;
-    padding: 0.2rem 0.5rem;
-    border-radius: 0.3rem;
-    -webkit-border-radius: 0.3rem;
-    -moz-border-radius: 0.3rem;
-    -ms-border-radius: 0.3rem;
-    -o-border-radius: 0.3rem;
-}
-.recipe-category{
-    background: #fff;
-    font-weight: 600;
-    color: var(--tenne-tawny);
-    display: inline-block;
-    padding: 0.2rem 0.5rem;
-    border-radius: 0.3rem;
-    -webkit-border-radius: 0.3rem;
-    -moz-border-radius: 0.3rem;
-    -ms-border-radius: 0.3rem;
-    -o-border-radius: 0.3rem;
-}
-/* Recipe fade-in animation */
-@keyframes fadeIn {
-    0% {
-      opacity: 0;
-      transform: translateY(20px); 
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  
-  
-  .recipe-instruct {
-    opacity: 0; 
-    animation: fadeIn 1s ease forwards; 
-    font-size: 2rem;
-    line-height: 1.6;
-    margin-top: 20px;
-    color: #ffffff;
-}
-
-
-.recipe-instruct h3 {
-    font-size: 1.5rem; 
-    margin-bottom: 10px;
-}
-
-  
-  
-  .showRecipe .meal-details-content {
-    opacity: 0;
-    animation: fadeIn 1s ease forwards;
-  }
-  
-.recipe-meal-img img{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    margin: 0 auto;
-    display: block;
-}
-.recipe-link{
-    margin: 1.4rem 0;
-}
-.recipe-link a{
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 700;
-    transition: all 0.4s linear;
-    -webkit-transition: all 0.4s linear;
-    -moz-transition: all 0.4s linear;
-    -ms-transition: all 0.4s linear;
-    -o-transition: all 0.4s linear;
-}
-.recipe-link a:hover{
-    opacity: 0.8;
-}
-
-
-/*  */
-.notFound{
-    grid-template-columns: 1fr!important;
-    color: var(--tenne-tawny);
-    font-size: 1.8rem;
-    font-weight: 600;
-    width: 100%;
-}
-
 
 
 
@@ -706,9 +849,7 @@ button:hover {
     .meal-item{
         margin: 0;
     }
-    .meal-details{
-        width: 700px;
-    }
+   
 }
 
 @media screen and (min-width: 992px){
@@ -717,7 +858,7 @@ button:hover {
     }
 }
 @media screen and (min-width: 768px) {
-    #meal {
+    #meal,#otherSuggestions {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  
         gap: 2rem;
@@ -729,11 +870,20 @@ button:hover {
 }
 @media (max-width: 600px) {
     .navbar {
-        flex-direction: column; /* Stack items vertically on small screens */
-        align-items: flex-start; /* Align items to the left */
-    }
+        flex-direction: column;         align-items: flex-start;     }
 
     .navbar-title {
-        margin-bottom: 10px; /* Add space below the title */
+        margin-bottom: 10px;     }
+}
+@media screen and (max-width: 768px) {
+    .meal-details {
+        width: 100%; /* Full width on smaller screens */
+        height: auto;
+        border-radius: 0; /* Remove border radius */
+    }
+
+    .meal-list {
+        width: 100%; /* Full width for meal list as well */
+        float: none;
     }
 }

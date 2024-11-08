@@ -4,94 +4,218 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Find Meal For Your Ingredients</title>
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="darkmode.css">
+  <link rel="stylesheet" href="popups.css">
+  <link rel="stylesheet" href="about-us.css">
+
+
+
 </head>
 <body>
   <header>
    <!-- Navigation Bar -->
    <nav class="navbar">
     <div class="navbar-content">
+      <div class="theme-toggle">
+        <i style="font-size:24px" class="fa fa-adjust" id="theme-toggle-btn"></i>       
+      </div>
       <h1 class="navbar-title">Recipe Finder</h1>
       <button class="login-btn" id="login-btn" >Login</button>
       <span style="font-size:30px;cursor:pointer"id="open-Nav" >&#9776; </span>
     </div>
   </nav>
 </header>
+<div id="about-us-container"></div>
+
 
   <!-- Sidebar Menu -->
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" id="close-nav" >&times;</a>
+    <div class="sidenavmanu">
     <div id="admin-menu" style="display: none;">
-      <button class="dropdown-btn">Manage Meals 
-        <i class="fa fa-caret-down"></i>
+      <button class="dropdown-btn" id="manageMealsBtn">Manage Meals 
+          <i class="fa fa-caret-down"></i>
       </button>
-      <div class="dropdown-container">
-        <a href="#" id="addMealBtn">Add Meal</a>
-        <a href="#" id="deleteMealBtn">Delete Meal</a>
-        <!-- Delete Meal Section -->
-        <div id="mealListContainer">
-          <div id="meallist">
-            <!-- This is where the meals will be dynamically inserted -->
-            <!-- Example meal item -->
-            <!-- Repeat for other meals -->
-        </div>
-        
-        </div>
- 
+      <div class="dropdown-container" id="mealsDropdown" style="display: none;">
+          <a href="#" id="addMealBtn">Add Meal</a>
+          <a href="#" id="deleteMealBtn">manage Meals</a>
       </div>
+      <button id="manageUsersBtn">Manage Users 
+      </button>
+  </div>
+  <div id="user-menu" style="display: none;">
+    <a href="#" id="loadFavoritesBtn" >My Favorites</a>
+</div>
 
-    </div>
-    <div id="user-menu" style="display: none;">
-      <a href="#">My Favorites</a>
-    </div>
     <div id="default-menu">
       <a href="#">Home</a>
       <a href="#">About</a>
       <a href="#">Services</a>
-      <a href="#">Contact</a>
+      <a  href="about-us.html">Contact</a>
     </div>
     <b><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <a href="#" id="logout-btn" style="display: none;" >Logout</a>
   </div>
-  <!-- Add Meal Modal -->
+  </div>
+
+
+
+  <button id="backBtn" class="back-btn">
+    ← Back
+</button>
+
+
+
+ <!-- Add Meal Modal -->
 <div id="addMealModal" class="addMealModal">
   <div class="addMealModal-content">
-    <span class="close" id="closeAddMealModal">&times;</span>
-    <h2>Add Meal</h2>
-    <form id="addMealForm"action="/addMeal" method="POST">
-      <label for="mealName">Meal Name:</label>
-      <input type="text" id="mealName" required>
+      <span class="close" id="closeAddMealModal">&times;</span>
+      <h2>Add Meal</h2>
+      <form id="addMealForm" action="/addMeal" method="POST">
+          <label for="mealName">Meal Name:</label>
+          <input type="text" id="mealName" required>
 
-      <label for="mealCategory">Category:</label>
-      <input type="text" id="mealCategory" required>
+          <label for="mealCategory">Category:</label>
+          <input type="text" id="mealCategory" required>
 
-      <label for="mealArea">Area:</label>
-      <input type="text" id="mealArea" required>
+          <label for="mealArea">Area:</label>
+          <input type="text" id="mealArea" required>
 
-      <label for="mealImageUrl">Image URL:</label>
-      <input type="url" id="mealImageUrl" required>
+          <label for="mealImageUrl">Image URL:</label>
+          <input type="url" id="mealImageUrl" required>
 
-      <label for="mealInstructions">Instructions:</label>
-      <textarea id="mealInstructions" required></textarea>
+          <label for="mealInstructions">Instructions:</label>
+          <textarea id="mealInstructions" required></textarea>
 
-      <h3>Ingredients</h3>
-      <div id="ingredientsContainer">
-        <!-- Ingredient inputs will be dynamically added here -->
-        <input type="text" class="ingredient" placeholder="Ingredient 1">
-      </div>
-      <button type="button" id="addIngredientBtn">Add Ingredient</button>
+          <h3>Ingredients</h3>
+          <div id="ingredientsContainer">
+              <!-- Ingredient inputs will be dynamically added here -->
+              <input type="text" class="ingredient" placeholder="Ingredient 1">
+          </div>
+          <button type="button" id="addIngredientBtn">Add Ingredient</button>
 
-      <button type="submit">Add Meal</button>
-    </form>
+          <label>Rating:</label>
+          <div id="ratingContainer">
+              <!-- Generate star ratings -->
+              <label>
+                  <input type="radio" name="rating" value="1" required> 1 Star
+              </label>
+              <label>
+                  <input type="radio" name="rating" value="2"> 2 Stars
+              </label>
+              <label>
+                  <input type="radio" name="rating" value="3"> 3 Stars
+              </label>
+              <label>
+                  <input type="radio" name="rating" value="4"> 4 Stars
+              </label>
+              <label>
+                  <input type="radio" name="rating" value="5"> 5 Stars
+              </label>
+          </div>
+
+          <button type="submit">Add Meal</button>
+      </form>
   </div>
 </div>
+
+<!-- Manage Meals Modal -->
+<div id="manageMealsModal" class="manageMealsModal" style="display:none;">
+  <div class="manageMealsModal-content">
+      <span class="close" id="closeManageMealsModal">&times;</span>
+      <h2>Manage Meals</h2>
+      <div id="mealListContainer">
+          <!-- Meals will be listed here with Edit and Delete buttons -->
+      </div>
+  </div>
+</div>
+<!-- Edit Meal Modal -->
+<div id="editMealModal" class="editMealModal">
+  <div class="editMealModal-content">
+      <span class="close" id="closeEditMealModal">&times;</span>
+      <h2>Edit Meal</h2>
+      <form id="editMealForm">
+          <label for="editMealName">Meal Name:</label>
+          <input type="text" id="editMealName" required>
+
+          <label for="editMealCategory">Category:</label>
+          <input type="text" id="editMealCategory" required>
+
+          <label for="editMealArea">Area:</label>
+          <input type="text" id="editMealArea" required>
+
+          <label for="editMealImageUrl">Image URL:</label>
+          <input type="url" id="editMealImageUrl" required>
+
+          <label for="editMealInstructions">Instructions:</label>
+          <textarea id="editMealInstructions" required></textarea>
+
+          <h3>Ingredients</h3>
+          <div id="editIngredientsContainer">
+              <!-- Ingredient inputs will be dynamically added here -->
+              <input type="text" class="ingredient" id="editIngredient1" placeholder="Ingredient 1">
+          </div>
+          <button type="button" id="addEditIngredientBtn">Add Ingredient</button>
+
+          <label>Rating:</label>
+          <div id="ratingContainer">
+              <!-- Generate star ratings -->
+              <label>
+                  <input type="radio" name="rating" value="1"> 1 Star
+              </label>
+              <label>
+                  <input type="radio" name="rating" value="2"> 2 Stars
+              </label>
+              <label>
+                  <input type="radio" name="rating" value="3"> 3 Stars
+              </label>
+              <label>
+                  <input type="radio" name="rating" value="4"> 4 Stars
+              </label>
+              <label>
+                  <input type="radio" name="rating" value="5"> 5 Stars
+              </label>
+          </div>
+
+          <button type="submit" id="updateBtn">Update Meal</button>
+      </form>
+  </div>
+</div>
+
+
+
+<!-- Manage Users Modal -->
+<div id="manageUsersModal" class="manageUsersModal">
+  <div class="manageUsersModal-content">
+      <span class="close" id="closeManageUsersModal">&times;</span>
+      <h2>Manage Users</h2>
+      <ul id="userList">
+          <!-- User list will be populated here -->
+      </ul>
+  </div>
+</div>
+
+<!-- POP UP MSG -->
+<div id="popup-modal" class="pmodal">
+  <div class="p-modal-content">
+      <span id="close-btn" class="close">&times;</span>
+      <p id="popup-message"></p>
+  </div>
+</div>
+
+<div id="loading-spinner" class="spinner" style="display:none;"></div>
 
  <!-- Login Modal -->
 <div id="loginModal" class="modal">
   <div class="modal-content">
       <span class="close" id="close">&times;</span>
       <h2>Login</h2>
+      <p id="loginError" class="error-message"></p>
       <form id="loginForm">
           <label for="username">Username:</label>
           <input type="text" id="username" name="username" required>
@@ -99,10 +223,12 @@
           <input type="password" id="password" name="password" required>
           <button type="submit" class="login-submit-btn">Login</button>
       </form>
+      
       <div class="signup-link">
           <p>Don't have an account? 
             <button id="showSignupModal">Sign Up</button>
           </p>
+          
       </div>
   </div>
 </div>
@@ -130,49 +256,94 @@
 <!-- Login button that opens the login modal -->
 
 </div>
-  <div class="container">
-    <div class="meal-wrapper">
-      <div class="meal-search">
-        <h2 class="title">Find Meals For Your Ingredients</h2>
-        <blockquote>Real food doesn't have ingredients, real food is ingredients.<br>
+
+<div class="mealsContainer">
+  <div class="meal-wrapper">
+    <!-- Main meal search content (on the left) -->
+    <div class="meal-search">
+      <div class="search-Container">
+        <h2 class="title">Find A Recipe For Your Meals</h2>
+        <blockquote>
+          Real food doesn't have ingredients, real food is ingredients.<br>
           <cite>- Jamie Oliver</cite>
         </blockquote>
-
+        <!-- Search box -->
         <div class="meal-search-box">
-          <input type="text" class="search-control" placeholder="Enter an ingredient" id="search-input">
+          <input type="text" class="search-control" placeholder="Enter a meal name" id="search-input">
           <button type="submit" class="search-btn btn" id="search-btn">
             <i class="fas fa-search"></i>
           </button>
         </div>
-     
-      
-      <div id="resultsContainer"></div> <!-- Container to display search results -->
-      
-      <div class="meal-result">
+      </div>
+      <div class="ingredient-checker">
+        <h3>Check Recipes by Your Ingredients</h3>
+        <textarea id="userIngredients" placeholder="Enter your available ingredients, separated by commas"></textarea>
+        <button type="button" id="checkIngredientsBtn">Check Recipes</button>
+      </div>
+
+      <!-- Your Search Results Container -->
+      <div class="meal-result" id="resultsContainer">
         <h2 class="title">Your Search Results:</h2>
-        <div id="meal">
-          <!-- Dynamic meal content will go here -->
+        <section id="search-results-section">
+          <div id="meal">
+            <!-- Filtered meal results will be dynamically inserted here -->
+          </div>
+        </section>
+      </div>
+      <div class="container">
+        <!-- Recently Viewed Meals Section -->
+        <div class="section" id="recentlyViewedSection">
+            <h2>Recently Viewed Meals</h2>
+            <div id="recentlyViewedContainer">
+                <!-- Recently viewed meals will be populated here -->
+            </div>
         </div>
+
+      <!-- Other Suggestions Container -->
+      <div class="meal-result" id="suggestionsContainer">
+        <h2 class="title">Available Recipes:</h2>
+        <section id="other-suggestions-section">
+          <div id="otherSuggestions">
+            <!-- Suggested meal items will be dynamically inserted here -->
+          </div>
+        </section>
       </div>
 
-      <div class="meal-details">
-        <!-- Recipe close button -->
-        <button type="button" class="btn recipe-close-btn" id="recipe-close-btn">
-          <i class="fas fa-times"></i>
-        </button>
+      <!-- display my fav -->
+  <div id="favoritesContainer" style="display: none;">
+    <h2>My Favorites</h2>
+    <div id="favoriteMealsList">
 
-        <!-- Meal content -->
-        <div class="meal-details-content">
-          <!-- Dynamic meal details will go here -->
-        </div>
+      <div class="meal">
+
       </div>
+
     </div>
- </div>
-  <!-- 
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js"></script> -->
+</div>
+    </div>
 
+    <!-- Meal details (on the right, initially hidden) -->
+    <!-- Meal details section on the right -->
+<div class="meal-details" id="meal-details">
+  <div class="meal-details-content">
+    <button type="button" class="btn recipe-close-btn" id="recipe-close-btn">Close</button>
+
+      <!-- Meal details will be dynamically injected here -->
+  </div>
+</div>
+
+  </div>
+</div>
+</div>
+
+
+
+
+ <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js"></script>
+  <script src="https://unpkg.com/compromise"></script>
   <script type="module" src="script.js"></script>
+
 </body>
 </html>
